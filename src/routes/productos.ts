@@ -1,12 +1,12 @@
-import { Router, Request, Response } from "express";
+import { Router } from 'express';
+import { getAllProductos, createProducto } from '../controllers/productos';
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response): Response => {
-  return res.send("Hola mundo");
-});
+// Ruta para obtener todos los productos
+router.get('/productos', getAllProductos);
 
+// Ruta para crear un nuevo producto
+router.post('/productos', createProducto);
 
-router.get("/:id", (req: Request, res: Response): Response => {
-  return res.send("Hola mundo");
-});
+export default router;

@@ -4,7 +4,7 @@
   "description": "Proyecto de un emprendimiento personal (Indumentaria) para llevar un control de stock, precios y estadisticas de los productos.",
   "main": "index.ts",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon index.ts"
   },
   "repository": {
     "type": "git",
@@ -22,11 +22,15 @@
   },
   "homepage": "https://github.com/Glutix/Indumentaria#readme",
   "dependencies": {
-    "express": "4.21.2"
+    "dotenv": "^16.4.7",
+    "express": "4.21.2",
+    "mysql2": "^3.12.0",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "@types/express": "4.17.21",
     "@types/node": "22.10.2",
+    "@types/sequelize": "^4.28.20",
     "nodemon": "3.1.9",
     "ts-node": "10.9.2",
     "typescript": "5.7.2"
