@@ -8,9 +8,8 @@ const PORT = process.env.PORT || 1234;
 
 // Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
+	console.log(`Server listening on http://localhost:${PORT}`);
 });
-
 
 /*import express, { Application, Request, Response } from "express";
 const app: Application = express();
