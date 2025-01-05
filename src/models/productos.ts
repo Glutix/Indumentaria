@@ -1,21 +1,16 @@
 import { Model, DataTypes, Optional } from "sequelize";
 import sequelize from "../db";
 import Tipo from "./tipos";
+import {
+	ProductoAttributes,
+	ProductoCreationAttributes,
+} from "../interfaces/productos";
 
-interface ProductoAttributes {
-  id_producto: number;
-  id_tipo: number;
-  nombre: string;
-  descripcion?: string | null;
-  material?: string | null;
-  talle: string;
-  marca?: string | null;
-  es_activo: boolean;
-}
-
-interface ProductoCreationAttributes extends Optional<ProductoAttributes, "id_producto"> {}
-
-const Producto = sequelize.define<ProductoModel>("Producto", {
+const Producto = sequelize.define<
+	Model<ProductoAttributes, ProductoCreationAttributes>
+>(
+	"Producto",
+	{
 		id_producto: {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
@@ -69,5 +64,3 @@ Producto.belongsTo(Tipo, {
 });
 
 export default Producto;
-
-export interface ProductoModel extends Model<ProductoAttributes, ProductoCreationAttributes>, ProductoAttributes {}

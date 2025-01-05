@@ -1,6 +1,16 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../db";
 import Producto from "./productos";
+
+interface PrecioAttributes {
+  id_precio: number;
+  id_producto: number;
+  precio_costo: number;
+  fecha_ingreso: Date;
+  fecha_egreso?: Date | null;
+}
+
+interface PrecioCreationAttributes extends Optional<PrecioAttributes, "id_precio" | "fecha_egreso"> {}
 
 const Precio = sequelize.define(
 	"Precio",
@@ -43,3 +53,5 @@ Producto.hasMany(Precio, { foreignKey: "id_producto", as: "precios" });
 Precio.belongsTo(Producto, { foreignKey: "id_producto", as: "producto" });
 
 export default Precio;
+
+export interface PrecioModel extends Model<PrecioAttributes, PrecioCreationAttributes>, PrecioAttributes {}

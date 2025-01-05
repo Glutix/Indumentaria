@@ -1,8 +1,9 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../db";
+import { TipoAttributes, TipoCreationAttributes } from "../interfaces/tipos";
 
-const Tipo = sequelize.define(
-	"Tipo",
+
+const Tipo = sequelize.define<Model<TipoAttributes, TipoCreationAttributes > >("Tipo",
 	{
 		id_tipo: {
 			type: DataTypes.INTEGER,
@@ -21,7 +22,6 @@ const Tipo = sequelize.define(
 	{
 		tableName: "tipos", // Nombre de la tabla en la base de datos
 		timestamps: false, // Si la tabla tiene campos de fecha (createdAt, updatedAt), puedes quitar esto
-	}
-);
+	});
 
 export default Tipo;
