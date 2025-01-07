@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-  getAllLots, getLotById, createLot, updateLot
+  getAllLots, getLotById, //createLot, updateLot
 } from "../controllers/lotes";
 
 const router = Router();
@@ -12,9 +12,9 @@ router.get("/", getAllLots);
 router.get("/:id_producto", getLotById);
 
 // Ruta para crear un nuevo lote
-router.post("/", createLot);
+//router.post("/", createLot);
 
 // Ruta para actualizar un lote
-router.put("/:id_lote", updateLot);
+//router.put("/:id_lote", updateLot);
 
 export default router;

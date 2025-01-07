@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import Venta from "../models/ventas";
-import Lote from "../models/lotes";
-import Producto from "../models/productos";
-import { Op } from "sequelize";
+import { Venta } from "../models/ventas";
+import { Lote } from "../models/lotes";
+import { Producto } from "../models/productos";
+// import { Op } from "sequelize";
 
 // Obtener todas las ventas
 export const getAllSales = async (req: Request, res: Response) => {
@@ -21,7 +21,7 @@ export const getAllSales = async (req: Request, res: Response) => {
   }
 };
 
-// Obtener una venta por ID 
+// Obtener una venta por ID
 export const getSaleById = async (req: Request, res: Response) => {
   const { id_venta } = req.params;
   try {
@@ -41,7 +41,7 @@ export const getSaleById = async (req: Request, res: Response) => {
   }
 };
 
-// Crear una venta y descontar cantidad del lote más viejo
+/* // Crear una venta y descontar cantidad del lote más viejo
 export const createSale = async (req: Request, res: Response) => {
   const { id_producto, cantidad, tipo_pago, monto, fecha_venta } = req.body;
 
@@ -56,7 +56,9 @@ export const createSale = async (req: Request, res: Response) => {
     });
 
     if (lots.length === 0) {
-      return res.status(404).json({ error: "No hay lotes disponibles para este producto." });
+      return res
+        .status(404)
+        .json({ error: "No hay lotes disponibles para este producto." });
     }
 
     let remainingQuantity = cantidad;
@@ -81,7 +83,9 @@ export const createSale = async (req: Request, res: Response) => {
 
     // Si después de iterar sobre los lotes, la cantidad restante es mayor que 0, significa que no había suficiente stock
     if (remainingQuantity > 0) {
-      return res.status(400).json({ error: "No hay suficiente stock para realizar la venta." });
+      return res
+        .status(400)
+        .json({ error: "No hay suficiente stock para realizar la venta." });
     }
 
     // Actualizamos los lotes en la base de datos
@@ -95,7 +99,7 @@ export const createSale = async (req: Request, res: Response) => {
       monto,
       fecha_venta,
       // Tomamos el primer lote para la venta
-      id_lote: lots[0].id_lote, 
+      id_lote: lots[0].id_lote,
     });
 
     return res.status(201).json(sale);
@@ -103,12 +107,13 @@ export const createSale = async (req: Request, res: Response) => {
     console.error("Error al realizar la venta:", error);
     return res.status(500).json({ error: "Error al realizar la venta" });
   }
-};
+}; */
 
 // Actualizar una venta por ID
 export const updateSale = async (req: Request, res: Response) => {
   const { id_venta } = req.params;
-  const { id_lote, id_producto, cantidad, tipo_pago, monto, fecha_venta } = req.body;
+  const { id_lote, id_producto, cantidad, tipo_pago, monto, fecha_venta } =
+    req.body;
   try {
     const sale = await Venta.findByPk(id_venta);
     if (!sale) {

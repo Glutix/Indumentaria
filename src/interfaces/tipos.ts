@@ -1,17 +1,16 @@
-
-enum edades {
-	"NIÑOS",
-	"JOVENES",
-	"ADULTOS",
+export enum Edades {
+  NINIOS = "Niños",
+  JOVENES = "Jóvenes",
+  ADULTOS = "Adultos",
 }
 
-enum sexo {
-  "F", "M"
+export enum Sexo {
+  FEMENINO = "F",
+  MASCULINO = "M",
 }
+
 export interface TipoAttributes {
-	id_tipo: number;
-	clasificacion_edad: edades;
-  sexo: sexo;
+  id_tipo: number;
+  clasificacion_edad: Edades;
+  sexo: Sexo;
 }
-
-export interface TipoCreationAttributes extends Omit<TipoAttributes, "id_tipo"> {}

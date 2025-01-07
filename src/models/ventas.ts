@@ -1,21 +1,16 @@
-import { Model, DataTypes, Optional } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import sequelize from "../db";
-import Producto from "./productos";
-import Lote from "./lotes";
 
-interface VentaAttributes {
-  id_venta: number;
-  id_producto: number;
-  id_lote: number;
-  cantidad: number;
-  tipo_pago: "TRANSFERENCIA" | "EFECTIVO";
-  monto: number;
-  fecha_venta: Date;
-}
+//? Modelos
+import { Producto } from "./productos";
+import { Lote } from "./lotes";
 
-interface VentaCreationAttributes extends Optional<VentaAttributes, "id_venta"> {}
+//? Interfaces
+import { VentaAttributes } from "../interfaces/ventas";
 
-const Venta = sequelize.define<VentaModel>("Venta", {
+export const Venta = sequelize.define<Model<VentaAttributes>>(
+  "Venta",
+  {
     id_venta: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -63,7 +58,3 @@ const Venta = sequelize.define<VentaModel>("Venta", {
 // Relaciones
 Venta.belongsTo(Producto, { foreignKey: "id_producto", as: "producto" });
 Venta.belongsTo(Lote, { foreignKey: "id_lote", as: "lote" });
-
-export default Venta;
-
-export interface VentaModel extends Model<VentaAttributes, VentaCreationAttributes>, VentaAttributes {}

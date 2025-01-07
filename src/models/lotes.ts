@@ -1,19 +1,15 @@
-import { Model, DataTypes, Optional } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import sequelize from "../db";
-import Producto from "./productos";
 
-interface LoteAttributes {
-  id_lote: number;
-  id_producto: number;
-  cantidad: number;
-  precio_costo: number;
-  fecha_ingreso: Date;
-  codigo_barra?: string | null;
-}
+//? Models
+import { Producto } from "./productos";
 
-interface LoteCreationAttributes extends Optional<LoteAttributes, "id_lote"> {}
+//? Interfaces
+import { LoteAttributes } from "../interfaces/lotes";
 
-const Lote = sequelize.define<LoteModel>("Lote", {
+export const Lote = sequelize.define<Model<LoteAttributes>>(
+  "Lote",
+  {
     id_lote: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -22,10 +18,6 @@ const Lote = sequelize.define<LoteModel>("Lote", {
     id_producto: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-				model: "productos", // Relaciona con la tabla 'productos'
-				key: "id_producto",
-			},
     },
     cantidad: {
       type: DataTypes.INTEGER,
@@ -47,14 +39,10 @@ const Lote = sequelize.define<LoteModel>("Lote", {
   },
   {
     tableName: "lotes", // Nombre de la tabla en la base de datos
-    timestamps: false,
+    timestamps: true,
   }
 );
 
 // Establecer relación con Producto
 Producto.hasMany(Lote, { foreignKey: "id_producto", as: "lotes" });
 Lote.belongsTo(Producto, { foreignKey: "id_producto", as: "producto" });
-
-export default Lote;
-
-export interface LoteModel extends Model<LoteAttributes, LoteCreationAttributes>, LoteAttributes {}

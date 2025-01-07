@@ -2,8 +2,8 @@ import { Router } from "express";
 import {
 	getAllPrices,
 	getPricesById,
-	createPrice,
-	updatePriceProducto,
+	//createPrice,
+	//updatePriceProducto,
 } from "../controllers/precios";
 
 const router = Router();
@@ -15,9 +15,9 @@ router.get("/", getAllPrices);
 router.get("/:id_producto", getPricesById);
 
 // Ruta para crear un nuevo precio
-router.post("/", createPrice);
+//router.post("/", createPrice);
 
 // Ruta para actualizar un precio
-router.put("/:id_producto", updatePriceProducto);
+// router.put("/:id_producto", updatePriceProducto);
 
 export default router;

@@ -1,9 +1,9 @@
 import { Router } from "express";
 import {
-	getAllProducts,
-	createProduct,
-	getProductById,
-	updateProduct /* , deleteProduct */,
+  getAllProducts,
+  //createProduct,
+  //getProductById,
+  //updateProduct /* , deleteProduct */,
 } from "../controllers/productos";
 
 const router = Router();
@@ -12,13 +12,13 @@ const router = Router();
 router.get("/", getAllProducts);
 
 // Ruta para obtener un producto por ID
-router.get("/:id", getProductById);
+//router.get("/:id", getProductById);
 
 // Ruta para crear un nuevo producto
-router.post("/", createProduct);
+//router.post("/", createProduct);
 
 // Ruta para actualizar un producto
-router.put("/:id", updateProduct);
+// router.put("/:id", updateProduct);
 
 /* // Ruta para borrado logico de un producto
 router.delete('/:id', deleteProduct) */
