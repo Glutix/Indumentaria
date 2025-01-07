@@ -9,11 +9,10 @@ export const getAllTypes = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const tipos = TipoService.getAllTypes();
+    const tipos = await TipoService.getAllTypes();
     return res.status(200).json(tipos);
   } catch (error) {
     console.error("Error al obtener tipos:", error);
     return res.status(500).json({ message: "Error al obtener tipos" });
   }
 };
-
