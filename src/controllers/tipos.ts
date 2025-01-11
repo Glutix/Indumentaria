@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-//? Servicios
+// Servicios
 import { TipoService } from "../services/tipos";
 
 // Obtener todos los tipos
@@ -12,7 +12,6 @@ export const getAllTypes = async (
     const tipos = await TipoService.getAllTypes();
     return res.status(200).json(tipos);
   } catch (error) {
-    console.error("Error al obtener tipos:", error);
     return res.status(500).json({ message: "Error al obtener tipos" });
   }
 };

@@ -10,7 +10,6 @@ export class TipoService {
       if (error instanceof Error) {
         throw new Error(`Error al obtener tipos: ${error.message}`);
       }
-
       throw new Error("Error desconocido al obtener tipos");
     }
   }
