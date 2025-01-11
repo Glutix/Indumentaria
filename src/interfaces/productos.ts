@@ -1,12 +1,12 @@
-export interface ProductoAttributes {
-  id_producto: number;
+export interface ProductAttributes {
+  id_producto?: number;
   id_tipo: number;
   nombre: string;
   descripcion?: string;
   material?: string;
-  talle: string;
+  talle?: string;
   marca?: string;
   es_activo: boolean;
 }
 
-export interface ProductoCreationAttributes extends Omit<ProductoAttributes, "id_producto"> {}
+export type ProductCreationAttributes = Omit<ProductAttributes, "id_producto">;

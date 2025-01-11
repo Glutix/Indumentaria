@@ -2,9 +2,9 @@ import { DataTypes, Model } from "sequelize";
 import sequelize from "../db";
 
 //? Interfaces
-import { TipoAttributes } from "../interfaces/tipos";
+import { TypesAttributes } from "../interfaces/tipos";
 
-export const Tipo = sequelize.define<Model<TipoAttributes>>(
+export const Tipo = sequelize.define<Model<TypesAttributes>>(
   "Tipo",
   {
     id_tipo: {

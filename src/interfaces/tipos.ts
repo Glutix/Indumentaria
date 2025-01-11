@@ -9,10 +9,10 @@ export enum Sexo {
   MASCULINO = "M",
 }
 
-export interface TipoAttributes {
+export interface TypesAttributes {
   id_tipo?: number;
   clasificacion_edad: Edades;
   sexo: Sexo;
 }
 
-export type CreateTipoAttributes = Omit<TipoAttributes, "id_tipo">[];
+export type CreateTypesAttributes = Omit<TypesAttributes, "id_tipo">[];

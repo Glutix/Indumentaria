@@ -1,11 +1,11 @@
 import { Tipo } from "../models/tipos";
 
-export class TipoService {
+export class TypesService {
   // Obtener todos los tipos
   static async getAllTypes(): Promise<any> {
     try {
-      const tipos = await Tipo.findAll();
-      return tipos;
+      const types = await Tipo.findAll();
+      return types;
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Error al obtener tipos: ${error.message}`);

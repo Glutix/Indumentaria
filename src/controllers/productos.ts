@@ -1,19 +1,14 @@
 import { Request, Response } from "express";
-import { Producto } from "../models/productos";
-import { Tipo } from "../models/tipos";
+import { ProductCreationAttributes } from "../interfaces/productos";
+import { ProductService } from "../services/productos";
 
-// Obtener todos los productos
+//! Obtener todos los productos
 export const getAllProducts = async (
-  req: Request,
+  _req: Request,
   res: Response
 ): Promise<Response> => {
   try {
-    const products = await Producto.findAll({
-      include: {
-        model: Tipo,
-        as: "tipo",
-      },
-    });
+    const products = await ProductService.getAllProducts();
     return res.status(200).json(products);
   } catch (error) {
     console.error("Error al obtener productos:", error);
@@ -23,7 +18,7 @@ export const getAllProducts = async (
   }
 };
 
-// Obtener un producto por ID
+//! Obtener un producto por ID
 export const getProductById = async (
   req: Request,
   res: Response
@@ -31,10 +26,7 @@ export const getProductById = async (
   const { id } = req.params;
 
   try {
-    const product = await Producto.findByPk(id);
-    if (!product) {
-      return res.status(404).json({ error: "Producto no encontrado" });
-    }
+    const product = await ProductService.getProductById(Number(id));
     return res.status(200).json(product);
   } catch (error) {
     console.error("Error al obtener el producto por id:", error);
@@ -44,67 +36,51 @@ export const getProductById = async (
   }
 };
 
-/* // Crear un nuevo producto
+//! Crear un nuevo producto
 export const createProduct = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { id_tipo, nombre, descripcion, material, talle, marca, es_activo } =
-    req.body;
+  const newProduct: ProductCreationAttributes = req.body;
 
   try {
-    const newProduct = await Producto.create({
-      id_tipo,
-      nombre,
-      descripcion,
-      material,
-      talle,
-      marca,
-      es_activo,
-    });
-    return res.status(201).json(newProduct);
+    const result = await ProductService.createProduct(newProduct);
+    return res.status(201).json(result);
   } catch (error) {
-    console.error("Error al crear producto:", error);
     return res.status(500).json({ message: "Error al crear producto" });
   }
-}; */
+};
 
-// Modificar un producto por ID
+//! Modificar un producto por ID
 export const updateProduct = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
   const { id } = req.params;
+  const product: ProductCreationAttributes = req.body;
+
   try {
-    const product = await Producto.findByPk(id);
-    if (!product) {
-      return res.status(404).json({ error: "Producto no encontrado" });
-    }
-    await product?.update(req.body);
-    return res.status(200).json(product);
+    const updatedProduct = await ProductService.updateProductById(
+      Number(id),
+      product
+    );
+    return res.status(200).json(updatedProduct);
   } catch (error) {
-    console.error("Error al actualizar un producto:", error);
-    console.log(id);
     return res.status(500).json({ message: "Error al actualizar un producto" });
   }
 };
 
-/* // Borrado lógico de un producto por ID
+//? Borrado lógico de un producto por ID
 export const deleteProduct = async (
-	req: Request,
-	res: Response
+  req: Request,
+  res: Response
 ): Promise<Response> => {
-	const { id } = req.params;
-	try {
-		const product = await Producto.findByPk(id);
-		if (!product) {
-			return res.status(404).json({ error: "Producto no encontrado" })
-		}
-		await product?.update(req.body);
-		return res.status(200).json(product);
-	} catch (error) {
-		console.error("Error al borrar un producto:", error);
-		return res.status(500).json({ message: "Error al borrar un producto" });
-	}
-}
- */
+  const { id } = req.params;
+  try {
+    const product = await ProductService.deleteProductById(Number(id));
+    return res.status(200).json(product);
+  } catch (error) {
+    console.error("Error al borrar un producto:", error);
+    return res.status(500).json({ message: "Error al borrar un producto" });
+  }
+};

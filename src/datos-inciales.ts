@@ -1,7 +1,7 @@
-import { CreateTipoAttributes, Edades, Sexo } from "./interfaces/tipos";
+import { CreateTypesAttributes, Edades, Sexo } from "./interfaces/tipos";
 
 // Tipos a insertar manualmente
-const tipos: CreateTipoAttributes = [
+const tipos: CreateTypesAttributes = [
   {
     clasificacion_edad: Edades.NINIOS,
     sexo: Sexo.MASCULINO,
@@ -34,10 +34,10 @@ export const loadTypes = async () => {
     const { Tipo } = await import("./models/tipos");
 
     // Verificar si ya existen tipos en la base de datos
-    const tiposExistentes = await Tipo.findAll();
+    const typesFound = await Tipo.findAll();
 
     // Si no existen tipos, cargar los tipos predeterminados
-    if (tiposExistentes.length === 0) {
+    if (typesFound.length === 0) {
       await Tipo.bulkCreate(tipos);
       console.log("Tipos cargados correctamente.");
     } else {

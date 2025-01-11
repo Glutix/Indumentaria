@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 // Servicios
-import { TipoService } from "../services/tipos";
+import { TypesService } from "../services/tipos";
 
 // Obtener todos los tipos
 export const getAllTypes = async (
@@ -9,8 +9,8 @@ export const getAllTypes = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const tipos = await TipoService.getAllTypes();
-    return res.status(200).json(tipos);
+    const types = await TypesService.getAllTypes();
+    return res.status(200).json(types);
   } catch (error) {
     return res.status(500).json({ message: "Error al obtener tipos" });
   }

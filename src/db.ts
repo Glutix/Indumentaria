@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
-import { loadTypes } from "./initData";
+import { loadTypes } from "./datos-inciales";
 
 // Cargar variables de entorno
 dotenv.config();
@@ -14,6 +14,7 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     dialect: "mysql",
     port: Number(process.env.DB_PORT),
+    logging: false,
   }
 );
 

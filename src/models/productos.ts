@@ -5,9 +5,9 @@ import sequelize from "../db";
 import { Tipo } from "./tipos";
 
 // ? Interfaces
-import { ProductoAttributes } from "../interfaces/productos";
+import { ProductAttributes } from "../interfaces/productos";
 
-export const Producto = sequelize.define<Model<ProductoAttributes>>(
+export const Producto = sequelize.define<Model<ProductAttributes>>(
   "Producto",
   {
     id_producto: {
@@ -18,10 +18,6 @@ export const Producto = sequelize.define<Model<ProductoAttributes>>(
     id_tipo: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: "tipos", // Relaciona con la tabla 'tipos'
-        key: "id_tipo",
-      },
     },
     nombre: {
       type: DataTypes.STRING,
@@ -29,35 +25,32 @@ export const Producto = sequelize.define<Model<ProductoAttributes>>(
     },
     descripcion: {
       type: DataTypes.TEXT,
-      allowNull: true, // Este campo puede ser nulo si no siempre se proporciona una descripción
+      allowNull: true,
     },
     material: {
       type: DataTypes.STRING,
-      allowNull: true, // Este campo puede ser nulo si no siempre se proporciona un material
+      allowNull: true,
     },
     talle: {
       type: DataTypes.STRING,
-      allowNull: false, // Este campo puede ser nulo si no siempre se proporciona un talle
+      allowNull: false,
     },
     marca: {
       type: DataTypes.STRING,
-      allowNull: true, // Este campo puede ser nulo si no siempre se proporciona una marca
-      defaultValue: null, // Por defecto es null
+      allowNull: true,
+      defaultValue: null,
     },
     es_activo: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: true, // Asumimos que el producto está activo por defecto
+      defaultValue: true,
     },
   },
   {
-    tableName: "productos", // Nombre de la tabla en la base de datos
-    timestamps: true, // Si la tabla tiene campos de fecha (createdAt, updatedAt), puedes quitar esto
+    tableName: "productos",
+    timestamps: true,
   }
 );
 
 // Relación: Un producto pertenece a un tipo
-Producto.belongsTo(Tipo, {
-  foreignKey: "id_tipo",
-  as: "tipo",
-});
+Producto.belongsTo(Tipo, { foreignKey: "id_tipo" });
